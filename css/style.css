@@ -578,12 +578,14 @@ body.has-art-home #big-name .ch:not(.box):not(.boxw){
 .game-card-thumb{
   width:100%;height:100%;
   position:relative;
+  background:#0f0f12;
 }
 .game-card-thumb img,
 .game-card-thumb video{
   width:100%;height:100%;
   object-fit:cover;
   display:block;
+  background:#000;
   transition:transform .3s ease;
 }
 .game-card:hover .game-card-thumb img,
