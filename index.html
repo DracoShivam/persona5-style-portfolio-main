@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B SHIVAM KUMAR · PORTFOLIO</title>
+<meta name="description" content="Portfolio of B Shivam Kumar — Full-Stack Developer, AI Engineer, and Game Developer. Production experience with LLM systems, data pipelines, and high-throughput backends.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-screen="home">
+
+<!-- Background art layers -->
+<div id="bg" aria-hidden="true">
+  <div class="bg-layer" id="bg-stripes"></div>
+  <svg class="bg-star" style="left:6%;top:8%;width:26vmax;height:26vmax" viewBox="0 0 100 100">
+    <polygon points="50,0 60,35 98,35 68,57 78,94 50,72 22,94 32,57 2,35 40,35" fill="#000"/>
+  </svg>
+  <svg class="bg-star s2" style="right:4%;bottom:6%;width:34vmax;height:34vmax" viewBox="0 0 100 100">
+    <polygon points="50,0 60,35 98,35 68,57 78,94 50,72 22,94 32,57 2,35 40,35" fill="#fff"/>
+  </svg>
+  <!-- Per-screen menu artwork: assets/menus/<screen>.jpg
+       Each falls back to the CSS stripes if its file is missing -->
+  <img class="menu-art" id="art-home" src="assets/menus/home.jpg" alt=""
+       onload="document.body.classList.add('has-art-home')" onerror="this.remove()">
+  <img class="menu-art" id="art-projects" src="assets/menus/projects.jpg" alt=""
+       onload="document.body.classList.add('has-art-projects')" onerror="this.remove()">
+  <img class="menu-art" id="art-skills" src="assets/menus/skills.jpg" alt=""
+       onload="document.body.classList.add('has-art-skills')" onerror="this.remove()">
+  <img class="menu-art" id="art-about" src="assets/menus/about.jpg" alt=""
+       onload="document.body.classList.add('has-art-about')" onerror="this.remove()">
+  <img class="menu-art" id="art-contact" src="assets/menus/contact.jpg" alt=""
+       onload="document.body.classList.add('has-art-contact')" onerror="this.remove()">
+  <div class="bg-layer" id="bg-halftone"></div>
+  <div class="bg-layer" id="bg-vignette"></div>
+</div>
+<div id="slash" aria-hidden="true"></div>
+
+<!-- Hero art: drop your file at assets/hero.png (transparent PNG looks best) -->
+<img id="hero-art" src="assets/hero.png" alt="" onerror="this.remove()">
+
+<!-- Screen transition wipe -->
+<div id="wipe" aria-hidden="true">
+  <div class="pane p3"></div>
+  <div class="pane p2"></div>
+  <div class="pane p1"></div>
+  <div class="flash"></div>
+</div>
+
+<!-- Custom animated cursor + select sound -->
+<div id="cursor" aria-hidden="true"></div>
+<audio id="sfx-select" src="assets/sfx/select.mp3" preload="auto"></audio>
+
+<div id="shell">
+  <div id="hud-top">
+    <div class="hud-tag">SHIVAM KUMAR</div>
+    <div class="hud-tag alt">Chennai · B.E. EEE · 2026</div>
+  </div>
+
+  <div id="stage">
+
+    <!-- HOME -->
+    <section class="screen active" id="screen-home" aria-label="Main menu">
+      <div id="intro-eyebrow">Full-Stack · AI Engineering · Game Dev</div>
+      <h1 id="big-name">
+        <span class="ransom" data-ransom="SHIVAM"></span>
+        <span class="ransom" data-ransom="KUMAR"></span>
+      </h1>
+      <p id="tagline">
+        Final-year B.E. student (May 2026) with production experience building LLM-powered
+        agentic systems, high-throughput data pipelines, and real-time analytics dashboards
+        at a quantitative trading firm. Scaled alert detection 24× to 192,000+ concurrent
+        processes. Azure certified. Shipping across Full-Stack, AI Engineering, and Game Dev.
+      </p>
+      <nav id="menu" aria-label="Sections">
+        <button class="menu-item sel" data-target="projects">
+          <span class="ransom" data-ransom="PROJECTS"></span><span class="cursor-mark">◀</span>
+        </button>
+        <button class="menu-item" data-target="skills">
+          <span class="ransom" data-ransom="SKILLS"></span><span class="cursor-mark">◀</span>
+        </button>
+        <button class="menu-item" data-target="games">
+          <span class="ransom" data-ransom="GAMES"></span><span class="cursor-mark">◀</span>
+        </button>
+        <button class="menu-item" data-target="about">
+          <span class="ransom" data-ransom="ABOUT"></span><span class="cursor-mark">◀</span>
+        </button>
+        <button class="menu-item" data-target="contact">
+          <span class="ransom" data-ransom="CONTACT"></span><span class="cursor-mark">◀</span>
+        </button>
+      </nav>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="screen sub" id="screen-projects" aria-label="Projects">
+      <div class="screen-head"><span class="ransom" data-ransom="PROJECTS"></span></div>
+      <button class="back-hint" data-back>ESC · Back</button>
+      <div class="grid-label"><span class="bar"></span>Featured</div>
+      <div id="feat-grid" class="grid"></div>
+      <div class="grid-label"><span class="bar"></span>All repositories</div>
+      <div id="repo-status">Contacting GitHub…</div>
+      <div id="repo-grid" class="grid"></div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="screen sub" id="screen-skills" aria-label="Skills">
+      <div class="screen-head"><span class="ransom" data-ransom="SKILLS"></span></div>
+      <button class="back-hint" data-back>ESC · Back</button>
+      <div id="skills-body"></div>
+    </section>
+
+    <!-- GAMES -->
+    <section class="screen sub" id="screen-games" aria-label="Game Development">
+      <div class="screen-head"><span class="ransom" data-ransom="GAMES"></span></div>
+      <button class="back-hint" data-back>ESC · Back</button>
+      <div class="grid-label"><span class="bar"></span>Unity · C# · Game Dev</div>
+      <div class="game-grid">
+
+        <div class="game-card"
+          data-title="Barrel Ninja"
+          data-repo="https://github.com/DracoShivam/jp-5/tree/main"
+          data-media=""
+          data-summary="'Fruit Ninja' style game built in Unity. Architected a game manager using a finite-state machine (Menu → Gameplay → Game Over). Responsive UI via Unity Events; 2D physics slicing with AddTorque for satisfying barrel-cutting mechanics. C# · Unity · Physics 2D.">
+          <div class="game-card-thumb">
+            <img src="assets/Games/Barrel Ninja.jpg" alt="Barrel Ninja" onerror="this.style.display='none'">
+          </div>
+          <div class="game-card-overlay"><span>Barrel Ninja</span></div>
+        </div>
+
+        <div class="game-card"
+          data-title="3rd Person Character Controller"
+          data-repo="https://github.com/DracoShivam/"
+          data-media=""
+          data-summary="Robust third-person character controller in Unity / C#. Physics-based walk, run, and jump; dynamic camera that follows the player and avoids obstacles. Foundation for any third-person game project. C# · Unity · Cinemachine.">
+          <div class="game-card-thumb">
+            <img src="assets/Games/character-controller-poster.jpg" alt="3rd Person Controller" onerror="this.style.display='none'">
+          </div>
+          <div class="game-card-overlay"><span>3rd Person Controller</span></div>
+        </div>
+
+        <div class="game-card"
+          data-title="Marble Wave TD"
+          data-repo="https://github.com/DracoShivam/jp-4/tree/main"
+          data-media=""
+          data-summary="Tower defense game with dynamic difficulty scaling, enemy wave generation, and unique power-up mechanics. Programmed a dynamic camera system that tracks the action. C# · Unity · AI Pathfinding.">
+          <div class="game-card-thumb">
+            <img src="assets/Games/MarbleWave.jpg" alt="Marble Wave TD" onerror="this.style.display='none'">
+          </div>
+          <div class="game-card-overlay"><span>Marble Wave TD</span></div>
+        </div>
+
+        <div class="game-card"
+          data-title="Hurdle Rush"
+          data-repo="https://github.com/DracoShivam/jp-3/tree/main"
+          data-media=""
+          data-summary="Endless runner with an object pooling system for procedurally generated obstacles — keeps a stable high framerate. Seamless looping environment with parallax scrolling and particle effects. C# · Unity · Object Pooling.">
+          <div class="game-card-thumb">
+            <img src="assets/Games/HurdleRush.jpg" alt="Hurdle Rush" onerror="this.style.display='none'">
+          </div>
+          <div class="game-card-overlay"><span>Hurdle Rush</span></div>
+        </div>
+
+        <div class="game-card"
+          data-title="IntenseFarm"
+          data-repo="https://github.com/DracoShivam/jp-2/tree/main"
+          data-media=""
+          data-summary="Exploration of AI and procedural content generation in Unity. Implemented A* pathfinding for intelligent AI agent movement. Utilised ECS principles for efficient spawning and management of large numbers of game objects. C# · Unity · A* · ECS.">
+          <div class="game-card-thumb">
+            <img src="assets/Games/IntenseFarm.jpg" alt="IntenseFarm" onerror="this.style.display='none'">
+          </div>
+          <div class="game-card-overlay"><span>IntenseFarm</span></div>
+        </div>
+
+        <div class="game-card"
+          data-title="Driv3D"
+          data-repo="https://github.com/DracoShivam/JP-1"
+          data-media=""
+          data-summary="Vehicle controller built in Unity — raw player input translated into physics-based driving. Realistic vehicle behaviour through careful tuning of forces, friction, and collision response. C# · Unity · Physics 3D.">
+          <div class="game-card-thumb">
+            <img src="assets/Games/Driv3d.jpg" alt="Driv3D" onerror="this.style.display='none'">
+          </div>
+          <div class="game-card-overlay"><span>Driv3D</span></div>
+        </div>
+
+        <div class="game-card"
+          data-title="Gemini Task Rewarding App"
+          data-repo="https://github.com/DracoShivam/Gemini_Persona5_stats"
+          data-media=""
+          data-summary="Persona 5-inspired task rewarding system powered by the Gemini API. Generates personalised task recommendations and intelligent user feedback. Python backend integrating Gemini structured JSON schema output. Python · Gemini API · FastAPI.">
+          <div class="game-card-thumb">
+            <img src="assets/Games/p5.png" alt="Task Rewarding App" onerror="this.style.display='none'">
+          </div>
+          <div class="game-card-overlay"><span>Gemini Task App</span></div>
+        </div>
+
+        <div class="game-card"
+          data-title="PenFight Simulator"
+          data-repo="https://github.com/DracoShivam/PenFight"
+          data-media=""
+          data-summary="Physics-based PenFight simulation in Unity — recreating the classic tabletop game digitally. Pen objects collide using realistic rigid-body physics. First project using Git + Unity collaboration workflow. C# · Unity · Rigidbody Physics.">
+          <div class="game-card-thumb">
+            <div class="game-card-placeholder">
+              <span class="game-placeholder-icon">⚔️</span>
+              <span>PenFight Simulator</span>
+            </div>
+          </div>
+          <div class="game-card-overlay"><span>PenFight Simulator</span></div>
+        </div>
+
+        <div class="game-card"
+          data-title="RPG Combat Demo"
+          data-repo="https://github.com/DracoShivam/Junior-Programmer1"
+          data-media=""
+          data-summary="Turn-based RPG combat system built in Unity — health, attack, defence, and enemy AI. Demonstrates state machine driven combat flow, UI health bars, and event-driven game logic. C# · Unity · State Machine · UI Toolkit.">
+          <div class="game-card-thumb">
+            <div class="game-card-placeholder">
+              <span class="game-placeholder-icon">🗡️</span>
+              <span>RPG Combat Demo</span>
+            </div>
+          </div>
+          <div class="game-card-overlay"><span>RPG Combat Demo</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GAME MODAL -->
+    <div id="game-modal" aria-hidden="true">
+      <div class="game-modal-box">
+        <button class="game-modal-close" id="game-modal-close" aria-label="Close">✕</button>
+        <div id="game-modal-media"></div>
+        <h3 id="game-modal-title"></h3>
+        <p id="game-modal-desc"></p>
+        <a id="game-modal-link" href="#" target="_blank" rel="noopener" class="cv-btn">
+          <span>View Code ↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="screen sub align-right" id="screen-about" aria-label="About">
+      <div class="screen-head"><span class="ransom" data-ransom="ABOUT"></span></div>
+      <button class="back-hint" data-back>ESC · Back</button>
+      <div class="paper">
+        <!-- Profile photo: assets/me.png -->
+        <figure class="about-photo">
+          <img src="assets/me.png" alt="B Shivam Kumar" onerror="this.parentElement.remove()">
+          <figcaption>Shivam · Chennai</figcaption>
+        </figure>
+        <p class="quote">I believe the best systems aren't just technically correct — they're
+        built for the people on the other side of the screen. Whether I'm training a model,
+        designing a data pipeline, or architecting a real-time dashboard, I'm always asking:
+        <em>"does this actually solve a human problem?"</em></p>
+        <br>
+        <p>I'm a final-year <strong>B.E. Electrical &amp; Electronics Engineering</strong> student
+        at <span class="stamp">SSN College of Engineering, Chennai</span> (May 2026), currently
+        interning on the Quant &amp; Algo Team at
+        <span class="stamp">Futures First Info Services, Hyderabad</span>. In production, I've
+        reduced analyst configuration time by 30% with a Claude &amp; Gemini RAG assistant,
+        re-architected an alert-detection platform from 8,000 to 192,000+ concurrent processes
+        using RabbitMQ + async Python, and shipped a real-time Spring Boot + React dashboard
+        adopted directly by trading-desk operators — all within single Agile sprints.</p>
+        <br>
+        <p>My work spans three domains I'm equally excited about:
+        <strong>Full-Stack Development</strong> (Next.js, FastAPI, React, WebSockets, Docker),
+        <strong>AI Engineering</strong> (RAG pipelines, agentic LLMs, computer vision with ViT &amp;
+        EfficientNet, MLOps, Gemini &amp; Claude APIs), and <strong>Game Development</strong>
+        (C/C++, C#, system design). I hold an
+        <span class="stamp">Azure AZ-900</span> certification alongside CS50P and HarvardX
+        Python for Data Science. Explore my work at
+        <a href="https://github.com/DracoShivam" target="_blank" rel="noopener">github.com/DracoShivam</a>.</p>
+        <br>
+        <p>Outside of code, I find the same intellectual curiosity that drives engineering
+        also shapes how I approach problems in other domains — always trying to understand
+        systems at a deeper level, find the edges where things break, and build something that
+        holds up under real-world load. I'm actively seeking full-time roles in
+        Full-Stack Engineering, AI/ML Engineering, or Game Development starting May 2026.</p>
+      </div>
+      <a class="cv-btn" href="assets/cv/GraduateBuilder.pdf" download="Shivam_Kumar_Resume.pdf">
+        <span>⬇ Download my Resume (PDF)</span>
+      </a>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="screen sub align-right" id="screen-contact" aria-label="Contact">
+      <div class="screen-head"><span class="ransom" data-ransom="CONTACT"></span></div>
+      <button class="back-hint" data-back>ESC · Back</button>
+      <div class="paper" style="max-width:620px">
+        <p>I'm open to <strong>full-time roles in Full-Stack, AI Engineering, and Game Development</strong>
+        (graduating May 2026), internship extensions, and project collaborations.
+        Drop me a message below or reach me on any of these:</p>
+      </div>
+      <div class="contact-list">
+        <a class="contact-chip" href="mailto:shivamkumarb2003@gmail.com"><span>Email ✉</span></a>
+        <a class="contact-chip" href="https://linkedin.com/in/shivam-kumar-b405b1253" target="_blank" rel="noopener"><span>LinkedIn ↗</span></a>
+        <a class="contact-chip" href="https://github.com/DracoShivam" target="_blank" rel="noopener"><span>GitHub ↗</span></a>
+        <a class="contact-chip" href="tel:+917806843443"><span>+91 78068 43443 ☎</span></a>
+        <a class="contact-chip" href="assets/cv/GraduateBuilder.pdf" download="Shivam_Kumar_Resume.pdf"><span>Resume ⬇</span></a>
+      </div>
+
+      <!-- Message form — relayed to your inbox via formsubmit.co.
+           NOTE: the first-ever submission emails you a one-time activation link. -->
+      <form id="contact-form" class="paper" style="max-width:620px" novalidate>
+        <div class="form-head">Send me a message</div>
+        <label class="field">
+          <span>Name</span>
+          <input type="text" name="name" required maxlength="100" autocomplete="name">
+        </label>
+        <label class="field">
+          <span>Your email</span>
+          <input type="email" name="email" required maxlength="150" autocomplete="email">
+        </label>
+        <label class="field">
+          <span>Message</span>
+          <textarea name="message" required rows="5" maxlength="3000"></textarea>
+        </label>
+        <!-- honeypot: bots fill this, humans never see it -->
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off"
+               style="position:absolute;left:-5000px" aria-hidden="true">
+        <div class="form-foot">
+          <button type="submit" class="cv-btn form-send"><span>Send it ➤</span></button>
+          <div id="form-status" role="status"></div>
+        </div>
+      </form>
+    </section>
+
+  </div>
+
+  <div id="hud-bottom">
+    <span><span class="key">↑↓</span>Select</span>
+    <span><span class="key">Enter</span>Confirm</span>
+    <span><span class="key">Esc</span>Back</span>
+    <span style="margin-left:auto;opacity:.8" id="clock"></span>
+  </div>
+</div>
+
+<!-- MVC: model = data, view = DOM, controller = events -->
+<script src="js/model.js" defer></script>
+<script src="js/view.js" defer></script>
+<script src="js/controller.js" defer></script>
+</body>
+</html>
